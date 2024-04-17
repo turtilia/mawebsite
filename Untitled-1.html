@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <style>
+        .intro {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 15%; /* Отступы в процентах */
+            padding: 20px;
+            background-color: #f0f0f0; /* Полупрозрачный белый фон */
+            border-radius: 10px;
+            color: #000000; /* Цвет текста */
+            max-width: 550px;
+            display: flex; /* Используем flexbox */
+            min-height: 400px;
+            flex-direction: column; /* Располагаем элементы в столбец */
+            align-items: 0px; /* Центрируем элементы по горизонтали */
+            justify-content: 0px; /* Центрируем элементы по вертикали */
+            position: relative; /* Позиционирование относительно контейнера .intro */
+        }
+
+        /* Change the background color of the body */
+        body {
+            background-color: #000000; /* Change this color to the desired background color */
+        }
+
+        #video-container {
+            display: none;
+            position: absolute;
+            top: 50%;
+            right: 15%; /* Подстройте это значение в зависимости от вашего предпочтения */
+            transform: translateY(-50%);
+        }
+
+        #myVideo {
+            width: 1000px; /* Размер видео такой же, как у облака */
+            height: 650px; /* Размер видео такой же, как у облака */
+        }
+
+        #myPhoto {
+            display: none;
+            position: absolute;
+            top: 50%;
+            right: -150%; /* Отступ справа на 15% + ширина видео + дополнительный отступ */
+            width: 400px; /* Задаем ширину фото */
+            height: 640px; /* Задаем высоту фото */
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="intro">
+        <pre id="typing-text"></pre>
+        <img id="myPhoto" src="maface.jpg" alt="Photo">
+    </div>
+    <div id="video-container">
+        <video id="myVideo"  autoplay muted>
+            <source src="hui.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const text = "print('Взламываем ваш телефон...')\n" +
+                        "time.sleep(2)\n" +
+                        "print('Успешно получен доступ к вашему телефону!')\n" +
+                        "time.sleep(1)\n" +
+                        "print('Совершаем съемку фотографии в стиле Python...')\n" +
+                        "time.sleep(3)\n" +
+                        "console.log('Фотография создана!')\n" +
+                        "time.sleep(1)\n" +
+                        "console.log('Все завершено. Возвращаемся в безопасность...')\n\n" +
+                        "print('Hi, my name is Yeskender')\n" +
+                        "load_photo()\n";
+            const typingText = document.getElementById('typing-text');
+            const intro = document.querySelector('.intro');
+            typingText.textContent = ''; // Clear existing content
+
+            // Define a function to type text with animation
+            function typeText(text, index) {
+                if (index < text.length) {
+                    typingText.textContent += text[index];
+                    setTimeout(function() {
+                        typeText(text, index + 1);
+                    }, 50); // Adjust typing speed here (milliseconds)
+                    if (text[index] === '!') { // If the character "!" in the text, then show the video
+                        document.getElementById('video-container').style.display = 'block';
+                        document.getElementById('myVideo').play(); // Start playing the video
+                    }
+                } else {
+                    // After typing animation is complete, adjust intro height to fit the text
+                    intro.style.height = typingText.offsetHeight + 'px';
+                    document.getElementById('myPhoto').style.display = 'block'; // Show the photo
+                }
+            }
+
+            // Start typing animation
+            typeText(text, 0);
+        });
+    </script>
+</body>
+</html>
